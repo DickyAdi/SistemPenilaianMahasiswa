@@ -16,7 +16,7 @@ public class SistemPenilaianMahasiswa {
      */
     public static void main(String[] args) {
         System.out.println("Hello World");
-        System.out.println("apalah ini")
+        System.out.println("apalah ini");
     }
     
 }

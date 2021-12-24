@@ -29,7 +29,7 @@ public class matakuliah {
     }
     
     public void setSks(int val){
-        this.sks = sks;
+        this.sks = val;
     }
     
     public String getNama(){
