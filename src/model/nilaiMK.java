@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package matakuliah;
-import mahasiswa.mahasiswa;
+package model;
+import model.matakuliah;
+import model.mahasiswa;
 
 /**
  *

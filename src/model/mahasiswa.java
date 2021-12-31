@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mahasiswa;
-import matakuliah.matakuliah;
-import matakuliah.nilaiMK;
+package model;
 import java.util.ArrayList;
 
 /**
