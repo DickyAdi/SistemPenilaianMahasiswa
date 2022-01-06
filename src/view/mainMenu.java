@@ -65,6 +65,11 @@ public class mainMenu extends javax.swing.JFrame {
         btnCariData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCariData.setPreferredSize(new java.awt.Dimension(200, 200));
         btnCariData.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCariData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariDataActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnCariData);
 
         btnEditData.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -73,6 +78,11 @@ public class mainMenu extends javax.swing.JFrame {
         btnEditData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEditData.setPreferredSize(new java.awt.Dimension(200, 200));
         btnEditData.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDataActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnEditData);
 
         btnTabelData.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -81,6 +91,11 @@ public class mainMenu extends javax.swing.JFrame {
         btnTabelData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTabelData.setPreferredSize(new java.awt.Dimension(200, 200));
         btnTabelData.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTabelData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabelDataActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnTabelData);
 
         btnExitMenu.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -138,13 +153,30 @@ public class mainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInputDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputDataActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        new inputDataMahasiswa().show();
     }//GEN-LAST:event_btnInputDataActionPerformed
 
     private void btnExitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitMenuActionPerformed
         this.setVisible(false);
         new login().show();
     }//GEN-LAST:event_btnExitMenuActionPerformed
+
+    private void btnCariDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDataActionPerformed
+        this.setVisible(false);
+        new cariData().show();
+    }//GEN-LAST:event_btnCariDataActionPerformed
+
+    private void btnEditDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDataActionPerformed
+        this.setVisible(false);
+        new editData().show();
+    }//GEN-LAST:event_btnEditDataActionPerformed
+
+    private void btnTabelDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabelDataActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new tabelData().show();
+    }//GEN-LAST:event_btnTabelDataActionPerformed
 
     /**
      * @param args the command line arguments
