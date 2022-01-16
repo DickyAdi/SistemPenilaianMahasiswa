@@ -38,7 +38,6 @@ public class editData extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1058, 787));
         setSize(new java.awt.Dimension(1440, 1024));
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
@@ -84,6 +83,11 @@ public class editData extends javax.swing.JFrame {
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setPreferredSize(new java.awt.Dimension(150, 150));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -164,6 +168,10 @@ public class editData extends javax.swing.JFrame {
         this.setVisible(false);
         new mainMenu().show();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

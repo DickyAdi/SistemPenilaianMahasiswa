@@ -67,6 +67,11 @@ public class inputDataMahasiswa extends javax.swing.JFrame {
         btnInputNama.setMinimumSize(new java.awt.Dimension(100, 100));
         btnInputNama.setPreferredSize(new java.awt.Dimension(200, 200));
         btnInputNama.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInputNama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputNamaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -78,6 +83,11 @@ public class inputDataMahasiswa extends javax.swing.JFrame {
         btnInputMK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInputMK.setPreferredSize(new java.awt.Dimension(200, 200));
         btnInputMK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInputMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputMKActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -89,6 +99,11 @@ public class inputDataMahasiswa extends javax.swing.JFrame {
         btnInputNilai.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInputNilai.setPreferredSize(new java.awt.Dimension(200, 200));
         btnInputNilai.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInputNilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputNilaiActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -157,6 +172,24 @@ public class inputDataMahasiswa extends javax.swing.JFrame {
         this.setVisible(false);
         new mainMenu().show();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnInputNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputNamaActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new inputNama().show();
+    }//GEN-LAST:event_btnInputNamaActionPerformed
+
+    private void btnInputMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputMKActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new inputMatakuliah().show();
+    }//GEN-LAST:event_btnInputMKActionPerformed
+
+    private void btnInputNilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputNilaiActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new inputNilai().show();
+    }//GEN-LAST:event_btnInputNilaiActionPerformed
 
     /**
      * @param args the command line arguments
