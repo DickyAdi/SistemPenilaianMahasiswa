@@ -9,6 +9,17 @@ package view;
  *
  * @author dicky
  */
+
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import model.mahasiswa;
+import control.queSql;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 public class inputMatakuliah extends javax.swing.JFrame {
 
     /**
@@ -92,6 +103,11 @@ public class inputMatakuliah extends javax.swing.JFrame {
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Simpan");
         btnSave.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -182,6 +198,25 @@ public class inputMatakuliah extends javax.swing.JFrame {
         this.setVisible(false);
         new inputDataMahasiswa().show();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        queSql db = new queSql();
+        if (tfNama.getText() != null && tfSks.getText() != null){
+            String que = "INSERT INTO matakuliah(nama, sks)"+ "VALUES('"+tfNama.getText()+"',"+ Integer.parseInt(tfSks.getText())+ ")";
+            int conf = JOptionPane.showConfirmDialog(this, "Tambahkan Matakuliah "+tfNama.getText()+" ?");
+            if (conf == JOptionPane.YES_OPTION){
+                db.query(que);
+                tfNama.setText("");
+                tfSks.setText("");
+            } else {
+                tfNama.setText("");
+                tfSks.setText("");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "KOLOM TIDAK BOLEH KOSONG!!");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
