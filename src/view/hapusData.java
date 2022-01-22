@@ -9,11 +9,26 @@ package view;
  *
  * @author dicky
  */
+
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import model.mahasiswa;
+import control.queSql;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.matakuliah;
+
 public class hapusData extends javax.swing.JFrame {
 
     /**
      * Creates new form hapusData
      */
+    ResultSet rs;
     public hapusData() {
         initComponents();
     }
@@ -33,7 +48,7 @@ public class hapusData extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfNama = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,12 +81,17 @@ public class hapusData extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(51, 153, 255));
         jLabel2.setText("Nama Mahasiswa");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tfNama.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jButton2.setBackground(new java.awt.Color(51, 153, 255));
         jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Hapus");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -83,7 +103,7 @@ public class hapusData extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 270, Short.MAX_VALUE))
-                    .addComponent(jTextField1)
+                    .addComponent(tfNama)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -95,7 +115,7 @@ public class hapusData extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -155,6 +175,29 @@ public class hapusData extends javax.swing.JFrame {
         new editData().show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        queSql db = new queSql();
+            try {
+                if (db.searchNama(tfNama.getText()) == false){
+                    JOptionPane.showMessageDialog(this, "404 ERROR! Check Database!");
+                    tfNama.setText("");
+                } else {
+                    String quer = "DELETE FROM nilaimatakuliah WHERE NMidMhs="+db.searchidMhs(tfNama.getText());
+                    String que = "DELETE FROM mahasiswa WHERE nama='"+tfNama.getText()+"';";
+                    int conf = JOptionPane.showConfirmDialog(this, "You Sure want to delete "+tfNama.getText()+" from database?");
+                    if (conf == JOptionPane.YES_OPTION){
+                        db.query(quer);
+                        db.query(que);
+                        JOptionPane.showMessageDialog(this, "Data deleted!");
+                        tfNama.setText("");
+                    }
+                }
+            } catch (SQLException err){
+                Logger.getLogger(inputNilai.class.getName()).log(Level.SEVERE, null, err);
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,6 +241,6 @@ public class hapusData extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField tfNama;
     // End of variables declaration//GEN-END:variables
 }

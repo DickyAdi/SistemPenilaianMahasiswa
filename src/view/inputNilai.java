@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.nilaiMK;
 
 public class inputNilai extends javax.swing.JFrame {
 
@@ -207,17 +208,17 @@ public class inputNilai extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(cbMk)
+                        .addComponent(cbMk, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)))
-                .addGap(18, 18, 18)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,11 +315,16 @@ public class inputNilai extends javax.swing.JFrame {
                 int idMhs = db.searchidMhs(tfNama.getText());
                 int idMk = db.searchidMk(cbMk.getSelectedItem().toString());
                 int sks = db.getSksMk(cbMk.getSelectedItem().toString());
-                String que = "INSERT INTO nilaimatakuliah(quiz, uts, uas, sks, NMidMhs, NMidMk) "
-                        + "VALUES ("+Integer.parseInt(tfQuiz.getText())+","+Integer.parseInt(tfUts.getText())+","+Integer.parseInt(tfUas.getText())+", "+sks+","+idMhs+","+idMk+")";
+                String namaMk = db.getNamaMk(cbMk.getSelectedItem().toString());
+                nilaiMK nmk = new nilaiMK(namaMk, Double.parseDouble(tfQuiz.getText()), Double.parseDouble(tfUts.getText()), Double.parseDouble(tfUas.getText()), sks);
+                String que = "INSERT INTO nilaimatakuliah(quiz, uts, uas, sks, grade, idx, NMidMhs, NMidMk) "
+                        + "VALUES ("+Integer.parseInt(tfQuiz.getText())+","+Integer.parseInt(tfUts.getText())+","+Integer.parseInt(tfUas.getText())+", "+sks+",'"+nmk.getGrade()+"', "+nmk.getIndex()+", "+idMhs+","+idMk+")";
+                String update = "UPDATE mahasiswa"+"\nSET totSks="+(db.getsksMhs(tfNama.getText())+sks)+"\nWHERE idMhs="+idMhs+";";
+                db.query(update);
                 int conf = JOptionPane.showConfirmDialog(this, "Input Nilai?");
                 if (conf==JOptionPane.YES_OPTION){
                     db.query(que);
+                    JOptionPane.showMessageDialog(this, "Input Nilai telah selesai!");
                     tfNama.setText("");
                     tfQuiz.setText("");
                     tfUts.setText("");

@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.matakuliah;
 
 public class inputMatakuliah extends javax.swing.JFrame {
 

@@ -12,29 +12,28 @@ import model.mahasiswa;
  * @author dicky
  */
 public class nilaiMK{
-    private matakuliah mk; //disini di definisikan dia nilai dari matakuliah apa, karena nanti ini jadi arraylist di objek mahasiswa
+    private String mk; //disini di definisikan dia nilai dari matakuliah apa, karena nanti ini jadi arraylist di objek mahasiswa
     private double quiz;
     private double uts;
     private double uas;
     private int sks;
     private String grade;
-    private int index;
+    private double index;
     
-    public nilaiMK(matakuliah mk, double quiz, double uts, double uas, int sks, String grade, int index){
+    public nilaiMK(String mk, double quiz, double uts, double uas, int sks){
         this.mk = mk;
         this.quiz = quiz;
         this.uts = uts;
         this.uas = uas;
         this.sks = sks;
-        this.grade = grade;
-        this.index = index;
+        this.grade = getGrade();
     }
     
-    public void setMk(matakuliah val){
+    public void setMk(String val){
         this.mk = val;
     }
     
-    public matakuliah getMk(){
+    public String getMk(){
         return this.mk;
     }
     
@@ -75,14 +74,47 @@ public class nilaiMK{
     }
     
     public String getGrade(){
-        return this.grade;
+        double perQuiz;
+        double perUts;
+        double perUas;
+        double total;
+        String grade;
+        
+        perQuiz = (30.0 / 100.0) * getQuiz();
+        perUts = (35.0 / 100.0) * getUts();
+        perUas = (35.0 / 100.0) * getUas();
+        total = perQuiz + perUts + perUas;
+        if (total > 80) {
+            grade = "A";
+            setIndex(4*getSks());
+        } else if (total > 70 && total <= 80){
+            grade = "AB";
+            setIndex(3.5*getSks());
+        } else if (total > 60 && total <= 70){
+            grade = "B";
+            setIndex(3*getSks());
+        } else if (total > 50 && total <= 60){
+            grade = "BC";
+            setIndex(2.5 * getSks());
+        } else if (total > 40 && total <= 50){
+            grade = "C";
+            setIndex(2*getSks());
+        } else if (total > 30 && total <= 40){
+            grade = "D";
+            setIndex(1.5 * getSks());
+        } else {
+            grade = "E";
+            setIndex(1*getSks());
+        }
+        
+        return grade;
     }
     
-    public void setIndex(int val){
+    public void setIndex(double val){
         this.index = val;
     }
     
-    public int getIndex(){
+    public double getIndex(){
         return this.index;
     }
 }

@@ -9,11 +9,28 @@ package view;
  *
  * @author dicky
  */
+
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import model.mahasiswa;
+import control.queSql;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.matakuliah;
+
 public class editNama extends javax.swing.JFrame {
 
     /**
      * Creates new form editNama
      */
+    
+    ResultSet rs;
+    
     public editNama() {
         initComponents();
     }
@@ -84,6 +101,11 @@ public class editNama extends javax.swing.JFrame {
         btnEdit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 255));
@@ -197,6 +219,46 @@ public class editNama extends javax.swing.JFrame {
         this.setVisible(false);
         new editData().show();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        String nimLama = tfNimLama.getText();
+        String nimBaru = tfNimBaru.getText();
+        String namaLama = tfNamaLama.getText();
+        String namaBaru = tfNamaBaru.getText();
+        queSql db = new queSql();
+        
+        try {
+            if (nimLama.equals(nimBaru) && namaLama.equals(namaBaru)){
+                JOptionPane.showMessageDialog(this, "ERROR! SAME DATA EDITED!");
+            } else if (db.searchNama(namaLama) == false && db.searchNim(nimLama) == false) {
+                JOptionPane.showMessageDialog(this, "404 NOT FOUND! Check Database\nError on Nama or Nim!");
+                tfNimLama.setText("");
+                tfNimBaru.setText("");
+                tfNamaLama.setText("");
+                tfNamaBaru.setText("");
+            } else {
+                String que = "UPDATE mahasiswa\nSET nama='"+namaBaru+"', nim='"+nimBaru+"'\nWHERE nama='"+namaLama+"'";
+                int conf = JOptionPane.showConfirmDialog(this, "Do you really want to do this changes?");
+                if (conf==JOptionPane.YES_OPTION){
+                    db.query(que);
+                    JOptionPane.showConfirmDialog(this, "Changes Implemented!");
+                    tfNimLama.setText("");
+                    tfNimBaru.setText("");
+                    tfNamaLama.setText("");
+                    tfNamaBaru.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Something's went wrong!");
+                    tfNimLama.setText("");
+                    tfNimBaru.setText("");
+                    tfNamaLama.setText("");
+                    tfNamaBaru.setText("");
+                }
+            }
+        } catch (SQLException err){
+            Logger.getLogger(inputNilai.class.getName()).log(Level.SEVERE, null, err);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments

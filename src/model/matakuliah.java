@@ -11,21 +11,15 @@ package model;
  */
 public class matakuliah {
     private String nama;
-    private String kode;
     private int sks;
     
-    public matakuliah(String nama, String kode, int sks){
+    public matakuliah(String nama, int sks){
         this.nama = nama;
-        this.kode = kode;
         this.sks = sks;
     }
     
     public void setNama(String nama){
         this.nama = nama;
-    }
-    
-    public void setKode(String kode){
-        this.kode = kode;
     }
     
     public void setSks(int val){
@@ -34,10 +28,6 @@ public class matakuliah {
     
     public String getNama(){
         return this.nama;
-    }
-    
-    public String getKode(){
-        return this.kode;
     }
     
     public int getSks(){

@@ -9,6 +9,21 @@ package view;
  *
  * @author dicky
  */
+
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import model.mahasiswa;
+import control.queSql;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.matakuliah;
+import model.nilaiMK;
+
 public class editNilai extends javax.swing.JFrame {
 
     /**
@@ -86,6 +101,11 @@ public class editNilai extends javax.swing.JFrame {
         btnEdit.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 255));
@@ -206,6 +226,50 @@ public class editNilai extends javax.swing.JFrame {
         this.setVisible(false);
         new editData().show();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        queSql db = new queSql();
+        try {
+            if (false == db.searchNama(tfNama.getText())){
+                JOptionPane.showMessageDialog(this, "404 ERROR! Check Database!");
+                tfNama.setText("");
+                tfMatakuliah.setText("");
+                tfQuiz.setText("");
+                tfUts.setText("");
+                tfUas.setText("");
+            } else if (db.isfollowingMk(tfNama.getText(), tfMatakuliah.getText()) == false){
+                JOptionPane.showMessageDialog(this, "MAHASISWA IS NOT FOLLOWING GIVEN MATAKULIAH!");
+                tfNama.setText("");
+                tfMatakuliah.setText("");
+                tfQuiz.setText("");
+                tfUts.setText("");
+                tfUas.setText("");
+            } else {
+                nilaiMK nmk = new nilaiMK(tfNama.getText(), Integer.parseInt(tfQuiz.getText()), Integer.parseInt(tfUts.getText()), Integer.parseInt(tfUas.getText()), db.getSksMk(tfNama.getText()));
+                String que = "UPDATE nilaimatakuliah\n" + "SET quiz="+Integer.parseInt(tfQuiz.getText())+", uts="+Integer.parseInt(tfUts.getText())+", uas="+Integer.parseInt(tfUas.getText())+", grade='"+nmk.getGrade()+"', idx="+nmk.getIndex()+" WHERE NMidMhs="+db.searchidMhs(tfNama.getText())+" AND NMidMk="+db.searchidMk(tfMatakuliah.getText());
+                int conf = JOptionPane.showConfirmDialog(this, "Are you sure to do the updates?");
+                if (conf==JOptionPane.YES_OPTION){
+                    db.query(que);
+                    JOptionPane.showMessageDialog(this, "Updates implemented!");
+                    tfNama.setText("");
+                    tfMatakuliah.setText("");
+                    tfQuiz.setText("");
+                    tfUts.setText("");
+                    tfUas.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "You canceled the udpates!");
+                    tfNama.setText("");
+                    tfMatakuliah.setText("");
+                    tfQuiz.setText("");
+                    tfUts.setText("");
+                    tfUas.setText("");
+                }
+            }
+        } catch (SQLException err){
+            Logger.getLogger(inputNilai.class.getName()).log(Level.SEVERE, null, err);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package model;
-import java.util.ArrayList;
 
 /**
  *
@@ -12,13 +11,12 @@ import java.util.ArrayList;
  */
 public class mahasiswa{
     private String nama;
-    private int nim;
+    private String nim;
     private double ipk;
     private int totSks;
-    private ArrayList<matakuliah> MK; //masing masing objek mahasiswa bisa nampung arraylist matakuliahnya sendiri
-    private ArrayList<nilaiMK> NMK; //masing masing objek mahasiswa bisa nampung arralist nilai tiap matakuliahnya sendiri
+
     
-    public mahasiswa(String nama, int nim){
+    public mahasiswa(String nama, String nim){
         this.nama = nama;
         this.nim = nim;
     }
@@ -31,12 +29,19 @@ public class mahasiswa{
         return this.nama;
     }
     
-    public void setNim(int val){
+    public void setNim(String val){
         this.nim = val;
     }
     
-    public int getNim(){
+    public String getNim(){
         return this.nim;
     }
     
+    public void setIpk(double val){
+        this.ipk = val;
+    }
+    
+    public double getIpk(){
+        return this.ipk;
+    }
 }
